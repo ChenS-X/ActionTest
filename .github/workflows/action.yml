@@ -5,11 +5,11 @@ jobs:
         name: nmp build工作
         runs-on: ubuntu-latest
         steps:
-            - name: 使用actions/checkout@v4读取仓库内容
-            - uses: actions/checkout@v4
+            - name: 读取仓库代码
+            uses: actions/checkout@v4
 
-            - name: 安装依赖
-            - run: npm install
+            - name: npm install
+            run: npm install
 
-            - name: 构建项目
-            - run: npm run build
+            - name: 构建
+            run: npm run build
