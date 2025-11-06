@@ -6,10 +6,44 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: 读取仓库代码
-            uses: actions/checkout@v4
-
+              uses: actions/checkout@v4
             - name: npm install
-            run: npm install
-
+              run: npm install
             - name: 构建
-            run: npm run build
+              run: npm run build
+
+
+
+#在 YAML 中，层级关系通过**缩进**来表示。以下是对您提供的 `action.yml` 文件中层级关系的详细说明：
+
+### YAML 层级表示方法
+
+#1. **缩进表示层级**
+#   - 使用空格进行缩进（通常为 2 个或 4 个空格）
+#   - 相同缩进级别的键值对属于同一对象
+#   - 更深层次的缩进表示嵌套的对象或数组元素
+
+#2. **具体层级分析**
+#   - `on` 和 `jobs` 属于同一层级（根级别）
+#   - `npm-build` 属于 `jobs` 的子级
+#   - `name`、`runs-on` 和 `steps` 属于 `npm-build` 的子级
+#   - `steps` 是一个数组，每个数组元素以 `-` 开头
+#   - 每个步骤中的 `name` 和 `uses`/`run` 属于同一层级（该步骤的属性）
+
+#3. **正确的层级结构**
+#   ```yaml
+#    on: push              # 根级别
+#   jobs:                 # 根级别
+#     npm-build:          # jobs 的子级
+#       name: nmp build工作    # npm-build 的子级
+#       runs-on: ubuntu-latest # npm-build 的子级
+#       steps:            # npm-build 的子级
+#         - name: 读取仓库代码  # steps 数组的第一个元素
+#           uses: actions/checkout@v4  # 与 name 同级
+#         - name: npm install   # steps 数组的第二个元素
+#           run: npm install    # 与 name 同级
+#         - name: 构建         # steps 数组的第三个元素
+#           run: npm run build  # 与 name 同级
+#    ```
+
+#注意：您的配置文件已经是正确的层级结构。每个步骤中的 `name` 和 `uses`/`run` 都在同一缩进级别，正确表示了它们属于同一个步骤对象。
