@@ -7,11 +7,6 @@ on:
 
     workflow_dispatch:
 
-permissions:
-    contents: read
-    pages: write
-    id-token: write
-
 # 允许一个并发的部署
 concurrency:
     group: 'pages'
@@ -21,6 +16,10 @@ jobs:
     npm-build:
         name: nmp build工作
         runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            pages: write
+            id-token: write
         steps:
             - name: 读取仓库代码
               uses: actions/checkout@v4
