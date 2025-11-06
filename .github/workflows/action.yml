@@ -7,10 +7,15 @@ jobs:
         steps:
             - name: 读取仓库代码
               uses: actions/checkout@v4
-            - name: npm install
-              run: npm install
-            - name: 构建
-              run: npm run build
+            - name: 安装依赖和项目打包
+              run: |
+                npm install
+                npm run build
+            - name: 部署
+              uses: JamesIves/github-pages-deploy-action@v4
+              with:
+                  folder: dist
+                  branch: gh-pages
 
 
 
